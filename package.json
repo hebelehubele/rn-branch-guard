@@ -27,10 +27,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/username/rn-branch-guard.git"
+    "url": "git+https://github.com/hebelehubele/rn-branch-guard"
   },
   "bugs": {
-    "url": "https://github.com/username/rn-branch-guard/issues"
+    "url": "https://github.com/hebelehubele/rn-branch-guard/issues"
   },
   "engines": {
     "node": ">=16.0.0"
