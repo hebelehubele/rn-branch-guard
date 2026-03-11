@@ -3,7 +3,7 @@
 ![npm version](https://img.shields.io/npm/v/rn-branch-guard)
 ![npm downloads](https://img.shields.io/npm/dm/rn-branch-guard)
 ![license](https://img.shields.io/npm/l/rn-branch-guard)
-![GitHub stars](https://img.shields.io/github/stars/KULLANICI_ADIN/rn-branch-guard)
+![GitHub stars](https://img.shields.io/github/stars/boletroy/rn-branch-guard)
 
 A tiny CLI that installs a Git `post-checkout` hook to warn when dependency files change between branches.
 
@@ -34,7 +34,7 @@ This can lead to confusing errors in JavaScript projects such as:
 Run inside your project:
 
 ```bash
-npx rn-branch-guard init    
+npx rn-branch-guard init
 
 
 ## COMMANDS
@@ -52,3 +52,4 @@ Examples: npm install yarn install / pnpm install
 Doctor output
 rn-branch-guard doctor
 
+```
