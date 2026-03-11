@@ -1,19 +1,38 @@
 {
   "name": "rn-branch-guard",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Install a Git post-checkout hook that warns when dependency files change between branches.",
   "bin": {
     "rn-branch-guard": "bin/index.js"
   },
   "files": [
     "bin",
-    "templates"
+    "templates",
+    "README.md"
   ],
   "keywords": [
     "react-native",
     "expo",
+    "git",
     "git-hooks",
-    "cli"
+    "branch",
+    "dependencies",
+    "cli",
+    "developer-tools",
+    "javascript",
+    "node",
+    "package-manager",
+    "dependencies-check"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/username/rn-branch-guard.git"
+  },
+  "bugs": {
+    "url": "https://github.com/username/rn-branch-guard/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }

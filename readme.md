@@ -1,12 +1,28 @@
 # rn-branch-guard
 
-A tiny CLI that installs a Git `post-checkout` hook to warn you when dependency files change between branches.
+![npm version](https://img.shields.io/npm/v/rn-branch-guard)
+![npm downloads](https://img.shields.io/npm/dm/rn-branch-guard)
+![license](https://img.shields.io/npm/l/rn-branch-guard)
+![GitHub stars](https://img.shields.io/github/stars/KULLANICI_ADIN/rn-branch-guard)
+
+A tiny CLI that installs a Git `post-checkout` hook to warn when dependency files change between branches.
 
 ## Why?
 
-When switching branches in React Native / Expo projects, dependency files may change while your installed packages remain outdated. This often causes confusing build or runtime errors.
+When switching branches, dependency files may change while your installed packages remain outdated.
 
-`rn-branch-guard` helps by showing a warning after checkout when files like these change:
+This can lead to confusing errors in JavaScript projects such as:
+
+- React
+- Next.js
+- Node.js
+- React Native / Expo
+- Vite
+- Vue
+
+`rn-branch-guard` helps by warning you after checkout when dependency files change.
+
+## What it checks
 
 - `package.json`
 - `package-lock.json`
@@ -15,8 +31,24 @@ When switching branches in React Native / Expo projects, dependency files may ch
 
 ## Usage
 
-Run this inside your project:
+Run inside your project:
 
 ```bash
-npx rn-branch-guard
+npx rn-branch-guard init    
+
+
+## COMMANDS
+rn-branch-guard init
+rn-branch-guard doctor
+rn-branch-guard uninstall
+rn-branch-guard --help
+rn-branch-guard --version
+
+Example warning
+📦 Dependency files changed between branches.
+⚠️ Run your package manager install command.
+Examples: npm install yarn install / pnpm install
+
+Doctor output
+rn-branch-guard doctor
 

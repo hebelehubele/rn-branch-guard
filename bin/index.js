@@ -3,14 +3,33 @@
 const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+const pkg = require("../package.json");
 
+const args = process.argv.slice(2);
 const projectRoot = process.cwd();
+
 const hooksDir = path.join(projectRoot, ".githooks");
 const templateHook = path.join(__dirname, "..", "templates", "post-checkout");
 const targetHook = path.join(hooksDir, "post-checkout");
 
 function log(message) {
   console.log(`[rn-branch-guard] ${message}`);
+}
+
+function showHelp() {
+  console.log(`
+rn-branch-guard
+
+A tiny CLI that installs a Git post-checkout hook
+to warn when dependency files change between branches.
+
+Usage:
+  rn-branch-guard init
+  rn-branch-guard doctor
+  rn-branch-guard uninstall
+  rn-branch-guard --help
+  rn-branch-guard --version
+`);
 }
 
 function ensureGitRepository() {
@@ -46,12 +65,23 @@ function setHooksPath() {
     execSync("git config core.hooksPath .githooks", { stdio: "ignore" });
     log("Configured Git hooks path to .githooks.");
   } catch {
-    log("Failed to set Git hooks path.");
+    log("Failed to configure Git hooks path.");
     process.exit(1);
   }
 }
 
-function main() {
+function getHooksPath() {
+  try {
+    return execSync("git config --get core.hooksPath", {
+      stdio: ["ignore", "pipe", "ignore"],
+      encoding: "utf8",
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
+function init() {
   ensureGitRepository();
   ensureHooksDirectory();
   ensureTemplateExists();
@@ -60,4 +90,57 @@ function main() {
   log("Setup complete.");
 }
 
-main();
+function doctor() {
+  ensureGitRepository();
+
+  const hookExists = fs.existsSync(targetHook);
+  const hooksPath = getHooksPath();
+
+  console.log("");
+  console.log("rn-branch-guard doctor");
+  console.log("");
+
+  console.log(`Git repository: yes`);
+  console.log(`.githooks directory: ${fs.existsSync(hooksDir) ? "yes" : "no"}`);
+  console.log(`post-checkout hook: ${hookExists ? "installed" : "missing"}`);
+  console.log(`core.hooksPath: ${hooksPath || "not set"}`);
+  console.log(`template file: ${fs.existsSync(templateHook) ? "found" : "missing"}`);
+  console.log("");
+}
+
+function uninstall() {
+  ensureGitRepository();
+
+  if (fs.existsSync(targetHook)) {
+    fs.unlinkSync(targetHook);
+    log("Removed post-checkout hook.");
+  } else {
+    log("No post-checkout hook found.");
+  }
+
+  const hooksPath = getHooksPath();
+  if (hooksPath === ".githooks") {
+    try {
+      execSync("git config --unset core.hooksPath", { stdio: "ignore" });
+      log("Removed Git hooks path configuration.");
+    } catch {
+      log("Failed to unset Git hooks path.");
+    }
+  }
+
+  log("Uninstall complete.");
+}
+
+if (args.includes("--help") || args.length === 0) {
+  showHelp();
+} else if (args.includes("--version")) {
+  console.log(pkg.version);
+} else if (args[0] === "init") {
+  init();
+} else if (args[0] === "doctor") {
+  doctor();
+} else if (args[0] === "uninstall") {
+  uninstall();
+} else {
+  showHelp();
+}

@@ -1,8 +1,10 @@
+# installed by rn-branch-guard
 #!/bin/sh
 
 CHANGED=$(git diff --name-only HEAD@{1} HEAD | grep -E "package.json|package-lock.json|yarn.lock|pnpm-lock.yaml")
 
 if [ -n "$CHANGED" ]; then
+  echo "✅ post-checkout hook triggered"
   echo ""
   echo "📦 Dependency files changed between branches."
   echo "⚠️ Run your package manager install command."
