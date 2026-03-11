@@ -1,9 +1,15 @@
 # rn-branch-guard
 
+- Detects dependency changes when switching branches
+- Works with npm, yarn and pnpm
+- Lightweight CLI tool
+- Works with any JavaScript project that uses Git.
+
+
 ![npm version](https://img.shields.io/npm/v/rn-branch-guard)
 ![npm downloads](https://img.shields.io/npm/dm/rn-branch-guard)
 ![license](https://img.shields.io/npm/l/rn-branch-guard)
-![GitHub stars](https://img.shields.io/github/stars/boletroy/rn-branch-guard)
+![GitHub stars](https://img.shields.io/github/stars/hebelehubele/rn-branch-guard)
 
 A tiny CLI that installs a Git `post-checkout` hook to warn when dependency files change between branches.
 
@@ -36,20 +42,24 @@ Run inside your project:
 ```bash
 npx rn-branch-guard init
 
-
-## COMMANDS
+🧰 Commands
 rn-branch-guard init
 rn-branch-guard doctor
 rn-branch-guard uninstall
 rn-branch-guard --help
 rn-branch-guard --version
 
-Example warning
+
+⚠️ Example warning
+
+When dependency files change between branches:
+
 📦 Dependency files changed between branches.
 ⚠️ Run your package manager install command.
-Examples: npm install yarn install / pnpm install
+   Examples: npm install / yarn install / pnpm install
 
-Doctor output
-rn-branch-guard doctor
+   🩺 Doctor command
 
-```
+    You can check if the hook is properly installed:
+
+    rn-branch-guard doctor
