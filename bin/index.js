@@ -56,7 +56,19 @@ function ensureTemplateExists() {
 }
 
 function installHook() {
+  if (fs.existsSync(targetHook)) {
+    log("post-checkout hook already exists. Skipping install.");
+    return;
+  }
+
   fs.copyFileSync(templateHook, targetHook);
+
+  try {
+    fs.chmodSync(targetHook, 0o755);
+  } catch {
+    log("Could not set executable permissions on hook file.");
+  }
+
   log("Installed post-checkout hook.");
 }
 
@@ -93,18 +105,26 @@ function init() {
 function doctor() {
   ensureGitRepository();
 
+  const hooksDirExists = fs.existsSync(hooksDir);
   const hookExists = fs.existsSync(targetHook);
   const hooksPath = getHooksPath();
+  const templateExists = fs.existsSync(templateHook);
 
   console.log("");
   console.log("rn-branch-guard doctor");
   console.log("");
 
   console.log(`Git repository: yes`);
-  console.log(`.githooks directory: ${fs.existsSync(hooksDir) ? "yes" : "no"}`);
+  console.log(`.githooks directory: ${hooksDirExists ? "yes" : "no"}`);
   console.log(`post-checkout hook: ${hookExists ? "installed" : "missing"}`);
   console.log(`core.hooksPath: ${hooksPath || "not set"}`);
-  console.log(`template file: ${fs.existsSync(templateHook) ? "found" : "missing"}`);
+  console.log(`template file: ${templateExists ? "found" : "missing"}`);
+
+  if (hooksPath !== ".githooks") {
+    console.log("");
+    console.log("Suggestion: run `rn-branch-guard init`");
+  }
+
   console.log("");
 }
 
@@ -126,6 +146,15 @@ function uninstall() {
     } catch {
       log("Failed to unset Git hooks path.");
     }
+  }
+
+  try {
+    if (fs.existsSync(hooksDir) && fs.readdirSync(hooksDir).length === 0) {
+      fs.rmdirSync(hooksDir);
+      log("Removed empty .githooks directory.");
+    }
+  } catch {
+    log("Could not remove .githooks directory.");
   }
 
   log("Uninstall complete.");

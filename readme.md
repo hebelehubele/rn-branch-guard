@@ -1,10 +1,10 @@
 # rn-branch-guard
 
+-Works with any Git-based JavaScript project.
 - Detects dependency changes when switching branches
 - Works with npm, yarn and pnpm
 - Lightweight CLI tool
 - Works with any JavaScript project that uses Git.
-
 
 ![npm version](https://img.shields.io/npm/v/rn-branch-guard)
 ![npm downloads](https://img.shields.io/npm/dm/rn-branch-guard)
@@ -49,6 +49,13 @@ rn-branch-guard uninstall
 rn-branch-guard --help
 rn-branch-guard --version
 
+## Features
+
+- Detects dependency file changes when switching Git branches
+- Works with npm, yarn and pnpm
+- Lightweight CLI tool
+- Works with any JavaScript project
+
 
 ⚠️ Example warning
 
@@ -63,3 +70,4 @@ When dependency files change between branches:
     You can check if the hook is properly installed:
 
     rn-branch-guard doctor
+```
