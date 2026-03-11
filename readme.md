@@ -1,6 +1,7 @@
 # rn-branch-guard
 
 -Works with any Git-based JavaScript project.
+
 - Detects dependency changes when switching branches
 - Works with npm, yarn and pnpm
 - Lightweight CLI tool
