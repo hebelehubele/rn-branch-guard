@@ -1,6 +1,6 @@
 {
   "name": "rn-branch-guard",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Install a Git post-checkout hook that warns when dependency files change between branches.",
   "bin": {
     "rn-branch-guard": "bin/index.js"

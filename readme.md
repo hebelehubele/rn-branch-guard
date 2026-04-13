@@ -1,5 +1,7 @@
 # rn-branch-guard
 
+-Works with any Git-based JavaScript project.
+
 - Detects dependency changes when switching branches
 - Works with npm, yarn and pnpm
 - Lightweight CLI tool
@@ -34,45 +36,35 @@ This can lead to confusing errors in JavaScript projects such as:
 - `yarn.lock`
 - `pnpm-lock.yaml`
 
-## Usage
+## 🚀 Usage
 
-Run inside your project:
+Run the following command inside your project directory to set it up:
 
 ```bash
 npx rn-branch-guard init
 ```
 
-🧰 Commands
-```bash
-rn-branch-guard init
-rn-branch-guard doctor
-rn-branch-guard uninstall
-rn-branch-guard --help
-rn-branch-guard --version
-```
+### 🧰 Available Commands
 
-## Features
+| Command | Description |
+|---|---|
+| `npx rn-branch-guard init` | Installs the `post-checkout` hook into your `.githooks` folder. |
+| `npx rn-branch-guard doctor` | Checks the health and installation status of the hook. |
+| `npx rn-branch-guard uninstall`| Removes the hook and cleans up the `.githooks` directory. |
+| `npx rn-branch-guard --help` | Displays help information. |
+| `npx rn-branch-guard --version`| Displays the current version. |
 
-- Detects dependency file changes when switching Git branches
-- Works with npm, yarn and pnpm
-- Lightweight CLI tool
-- Works with any JavaScript project
+## ⚠️ Example Warning
 
+When you switch to a branch with updated dependencies, you'll see a friendly warning like this:
 
-⚠️ Example warning
+```text
+🚨 [rn-branch-guard] Dependency files changed between branches!
+📦 Modified files:
+   - package.json
+   - yarn.lock
 
-When dependency files change between branches:
-
-📦 Dependency files changed between branches.
-⚠️ Run your package manager install command.
-   Examples: npm install / yarn install / pnpm install
-```
-
-🩺 Doctor command
-
-You can check if the hook is properly installed:
-
-```bash
-rn-branch-guard doctor
+⚠️  Don't forget to run your package manager install command:
+   npm install / yarn install / pnpm install
 ```
 ```
