@@ -1,7 +1,5 @@
 # rn-branch-guard
 
--Works with any Git-based JavaScript project.
-
 - Detects dependency changes when switching branches
 - Works with npm, yarn and pnpm
 - Lightweight CLI tool
@@ -42,13 +40,16 @@ Run inside your project:
 
 ```bash
 npx rn-branch-guard init
+```
 
 🧰 Commands
+```bash
 rn-branch-guard init
 rn-branch-guard doctor
 rn-branch-guard uninstall
 rn-branch-guard --help
 rn-branch-guard --version
+```
 
 ## Features
 
@@ -65,10 +66,13 @@ When dependency files change between branches:
 📦 Dependency files changed between branches.
 ⚠️ Run your package manager install command.
    Examples: npm install / yarn install / pnpm install
+```
 
-   🩺 Doctor command
+🩺 Doctor command
 
-    You can check if the hook is properly installed:
+You can check if the hook is properly installed:
 
-    rn-branch-guard doctor
+```bash
+rn-branch-guard doctor
+```
 ```

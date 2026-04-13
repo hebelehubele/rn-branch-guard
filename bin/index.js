@@ -9,7 +9,7 @@ const args = process.argv.slice(2);
 const projectRoot = process.cwd();
 
 const hooksDir = path.join(projectRoot, ".githooks");
-const templateHook = path.join(__dirname, "..", "templates", "post-checkout");
+const templateHook = path.join(__dirname, "..", "templates", "post-checkout.sh");
 const targetHook = path.join(hooksDir, "post-checkout");
 
 function log(message) {
