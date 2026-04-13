@@ -2,7 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
-const { execSync } = require("child_process");
+const { execFileSync } = require("child_process");
 const pkg = require("../package.json");
 
 const args = process.argv.slice(2);
@@ -34,7 +34,7 @@ Usage:
 
 function ensureGitRepository() {
   try {
-    execSync("git rev-parse --is-inside-work-tree", { stdio: "ignore" });
+    execFileSync("git", ["rev-parse", "--is-inside-work-tree"], { stdio: "ignore" });
   } catch {
     log("This directory is not a Git repository.");
     process.exit(1);
@@ -61,20 +61,18 @@ function installHook() {
     return;
   }
 
-  fs.copyFileSync(templateHook, targetHook);
-
   try {
+    fs.copyFileSync(templateHook, targetHook);
     fs.chmodSync(targetHook, 0o755);
-  } catch {
-    log("Could not set executable permissions on hook file.");
+    log("Installed post-checkout hook.");
+  } catch (error) {
+    log(`Failed to install post-checkout hook: ${error.message}`);
   }
-
-  log("Installed post-checkout hook.");
 }
 
 function setHooksPath() {
   try {
-    execSync("git config core.hooksPath .githooks", { stdio: "ignore" });
+    execFileSync("git", ["config", "core.hooksPath", ".githooks"], { stdio: "ignore" });
     log("Configured Git hooks path to .githooks.");
   } catch {
     log("Failed to configure Git hooks path.");
@@ -84,7 +82,7 @@ function setHooksPath() {
 
 function getHooksPath() {
   try {
-    return execSync("git config --get core.hooksPath", {
+    return execFileSync("git", ["config", "--get", "core.hooksPath"], {
       stdio: ["ignore", "pipe", "ignore"],
       encoding: "utf8",
     }).trim();
@@ -141,7 +139,7 @@ function uninstall() {
   const hooksPath = getHooksPath();
   if (hooksPath === ".githooks") {
     try {
-      execSync("git config --unset core.hooksPath", { stdio: "ignore" });
+      execFileSync("git", ["config", "--unset", "core.hooksPath"], { stdio: "ignore" });
       log("Removed Git hooks path configuration.");
     } catch {
       log("Failed to unset Git hooks path.");
