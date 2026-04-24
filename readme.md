@@ -46,13 +46,13 @@ npx rn-branch-guard init
 
 ### 🧰 Available Commands
 
-| Command | Description |
-|---|---|
-| `npx rn-branch-guard init` | Installs the `post-checkout` hook into your `.githooks` folder. |
-| `npx rn-branch-guard doctor` | Checks the health and installation status of the hook. |
-| `npx rn-branch-guard uninstall`| Removes the hook and cleans up the `.githooks` directory. |
-| `npx rn-branch-guard --help` | Displays help information. |
-| `npx rn-branch-guard --version`| Displays the current version. |
+| Command                         | Description                                                     |
+| ------------------------------- | --------------------------------------------------------------- |
+| `npx rn-branch-guard init`      | Installs the `post-checkout` hook into your `.githooks` folder. |
+| `npx rn-branch-guard doctor`    | Checks the health and installation status of the hook.          |
+| `npx rn-branch-guard uninstall` | Removes the hook and cleans up the `.githooks` directory.       |
+| `npx rn-branch-guard --help`    | Displays help information.                                      |
+| `npx rn-branch-guard --version` | Displays the current version.                                   |
 
 ## ⚠️ Example Warning
 
@@ -66,5 +66,4 @@ When you switch to a branch with updated dependencies, you'll see a friendly war
 
 ⚠️  Don't forget to run your package manager install command:
    npm install / yarn install / pnpm install
-```
-```
+
